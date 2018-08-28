@@ -13,12 +13,12 @@ class UserData extends React.Component {
     this.props
       .submit(my.sAMAccountName, state)
       .then(result => {
-        toast.success("Updated succeeded", {
+        toast.success("Your information has been saved!", {
           position: toast.POSITION.BOTTOM_RIGHT
         });
       })
       .catch(error => {
-        toast.error("Update failed", {
+        toast.error("Failed to save your information!", {
           position: toast.POSITION.BOTTOM_RIGHT
         });
       });
