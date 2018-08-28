@@ -5,13 +5,16 @@ import Layout from "../../lib/validated-form/reactstrap";
 import myInformation from "../../forms/my-information";
 
 const UserInfo = ({ values, submit }) => {
+  console.log(values);
   return (
-    <Form
-      definition={myInformation}
-      layout={Layout}
-      onSubmit={submit}
-      values={{ ...values }}
-    />
+    <div style={{ width: "26em" }}>
+      <Form
+        definition={myInformation}
+        layout={Layout}
+        onSubmit={submit}
+        values={{ ...values }}
+      />
+    </div>
   );
 };
 

@@ -47,7 +47,7 @@ class ReactStrapTemplates extends React.Component {
         </Label>
         <Input invalid={this.invalid(this.props.error)} {...this.props}>
           {this.props.options.map((option, i) => (
-            <option key={i} value={option.value}>
+            <option key={i} value={option.value} selected={option.selected}>
               {option.text}
             </option>
           ))}

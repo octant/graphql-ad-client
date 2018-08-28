@@ -27,7 +27,8 @@ const schema = {
     type: "text",
     label: "Title",
     required: true,
-    min: 3
+    min: 3,
+    pattern: /^[A-Z]/
   },
 
   department: {
@@ -38,12 +39,22 @@ const schema = {
     pattern: /^[A-Z]/
   },
 
+  physicalDeliveryOfficeName: {
+    type: "select",
+    label: "Office",
+    options: [
+      { value: "294 Willow Avenue", text: "294 Willow Avenue" },
+      { value: "Blind River", text: "Blind River" },
+      { value: "Elliot Lake", text: "Elliot Lake" },
+      { value: "Wawa", text: "Wawa" }
+    ]
+  },
+
   telephoneNumber: {
     type: "text",
     label: "Extension",
     required: true,
-    min: 4,
-    pattern: /\d{4}/,
+    pattern: /^\d{4}$/,
     message: "Enter a 4 digit extension"
   }
 };

@@ -1,22 +1,24 @@
 import React, { Component } from "react";
 import { Col, Container, Row } from "reactstrap";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
+import { Route } from "react-router-dom";
 
-import logo from "./logo.svg";
 import "./App.css";
 
+import NavBar from "./components/NavBar";
 import UserInfo from "./components/UserInformation";
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header" />
         <ToastContainer />
+        <NavBar />
+        <hr />
         <Container>
           <Row>
             <Col>
-              <UserInfo notify={toast} />
+              <Route path="/me" component={UserInfo} />
             </Col>
           </Row>
         </Container>

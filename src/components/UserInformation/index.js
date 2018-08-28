@@ -1,26 +1,25 @@
 import React from "react";
 import { graphql, compose } from "react-apollo";
 import gql from "graphql-tag";
-
+import { toast } from "react-toastify";
 import Form from "./Form";
 
 class UserData extends React.Component {
   handleSubmit = state => {
     const {
-      data: { my },
-      notify
+      data: { my }
     } = this.props;
 
     this.props
       .submit(my.sAMAccountName, state)
       .then(result => {
-        notify.success("Updated succeeded", {
-          position: notify.POSITION.TOP_RIGHT
+        toast.success("Updated succeeded", {
+          position: toast.POSITION.BOTTOM_RIGHT
         });
       })
       .catch(error => {
-        notify.error("Update failed", {
-          position: notify.POSITION.TOP_RIGHT
+        toast.error("Update failed", {
+          position: toast.POSITION.BOTTOM_RIGHT
         });
       });
   };
@@ -54,6 +53,7 @@ const userInfoQuery = gql`
       sN
       department
       telephoneNumber
+      physicalDeliveryOfficeName
     }
   }
 `;
@@ -68,6 +68,7 @@ const userInfoMutation = gql`
       sN
       department
       telephoneNumber
+      physicalDeliveryOfficeName
     }
   }
 `;
