@@ -36,7 +36,8 @@ const schema = {
     label: "Department",
     required: true,
     min: 2,
-    pattern: /^[A-Z]/
+    pattern: /^[A-Z]/,
+    message: "at least two characters starting with a capital"
   },
 
   physicalDeliveryOfficeName: {
@@ -55,7 +56,7 @@ const schema = {
     label: "Extension",
     required: true,
     pattern: /^\d{4}$/,
-    message: "Enter a 4 digit extension"
+    message: "enter a 4 digit extension"
   }
 };
 
