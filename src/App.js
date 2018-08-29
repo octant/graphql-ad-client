@@ -18,7 +18,7 @@ class App extends Component {
         <Container>
           <Row>
             <Col>
-              <Route path="/me" component={UserInfo} />
+              <Route path="/users/me" component={UserInfo} />
             </Col>
           </Row>
         </Container>
