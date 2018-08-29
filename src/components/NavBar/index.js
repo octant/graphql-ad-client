@@ -28,9 +28,15 @@ class NavBar extends React.Component {
   }
   render() {
     const {
-      data: { loading, my }
+      data: { error, loading, my }
     } = this.props;
 
+    if (loading) {
+      return <p>Loading ...</p>;
+    }
+    if (error) {
+      return <p>{error.message}</p>;
+    }
     return (
       <div>
         <Navbar color="light" light expand="md">
@@ -42,7 +48,7 @@ class NavBar extends React.Component {
             <Nav className="ml-auto" navbar>
               <NavItem>
                 <NavLink tag={Link} to="/me">
-                  {loading ? "logging in" : my.displayName}
+                  {my.displayName}
                 </NavLink>
               </NavItem>
             </Nav>
@@ -60,6 +66,5 @@ export default graphql(
         displayName
       }
     }
-  `,
-  { options: { pollInterval: 10000 } }
+  `
 )(NavBar);
