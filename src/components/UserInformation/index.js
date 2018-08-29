@@ -59,16 +59,9 @@ const userInfoQuery = gql`
 `;
 
 const userInfoMutation = gql`
-  mutation UpdateUser($id: String!, $user: ADUserInput!) {
-    updateUser(id: $id, user: $user) {
+  mutation UpdateADUser($id: String!, $user: ADUserInput!) {
+    updateADUser(id: $id, user: $user) {
       sAMAccountName
-      title
-      displayName
-      givenName
-      sN
-      department
-      telephoneNumber
-      physicalDeliveryOfficeName
     }
   }
 `;
@@ -78,7 +71,8 @@ const UserInfoWithMutation = graphql(userInfoMutation, {
   props: ({ mutate }) => ({
     submit: (id, user) =>
       mutate({
-        variables: { id, user }
+        variables: { id, user },
+        refetchQueries: ["myInformation"]
       })
   })
 });
