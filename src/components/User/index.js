@@ -1,23 +1,24 @@
 import React from "react";
 import { graphql, compose } from "react-apollo";
-import gql from "graphql-tag";
 import { toast } from "react-toastify";
+
 import Form from "./Form";
+
+import { USER_INFORMATION, UPDATE_AD_INFORMATION } from "./queries";
 
 class UserData extends React.Component {
   handleSubmit = state => {
     const {
-      data: { my }
+      data: { directoryEntry }
     } = this.props;
-
     this.props
-      .submit(my.sAMAccountName, state)
-      .then(result => {
+      .submit(directoryEntry.sAMAccountName, state)
+      .then(() => {
         toast.success("Your information has been saved!", {
           position: toast.POSITION.BOTTOM_RIGHT
         });
       })
-      .catch(error => {
+      .catch(() => {
         toast.error("Failed to save your information!", {
           position: toast.POSITION.BOTTOM_RIGHT
         });
@@ -26,9 +27,8 @@ class UserData extends React.Component {
 
   render() {
     const {
-      data: { error, loading, my }
+      data: { error, loading, directoryEntry }
     } = this.props;
-
     if (loading) {
       return <p>Loading ...</p>;
     }
@@ -36,48 +36,28 @@ class UserData extends React.Component {
       return <p>{error.message}</p>;
     }
     return (
-      <div>
-        <Form values={{ ...my }} submit={this.handleSubmit} />
+      <div key={this.props.match.params.username} style={{ width: "26em" }}>
+        <Form values={{ ...directoryEntry }} submit={this.handleSubmit} />
       </div>
     );
   }
 }
 
-const userInfoQuery = gql`
-  query myInformation {
-    my {
-      sAMAccountName
-      title
-      displayName
-      givenName
-      sN
-      department
-      telephoneNumber
-      physicalDeliveryOfficeName
-    }
-  }
-`;
+const WithDirectoryEntry = graphql(USER_INFORMATION, {
+  options: props => ({ variables: { username: props.match.params.username } })
+});
 
-const userInfoMutation = gql`
-  mutation UpdateADUser($id: String!, $user: ADUserInput!) {
-    updateADUser(id: $id, user: $user) {
-      sAMAccountName
-    }
-  }
-`;
-
-const UserInfoWithData = graphql(userInfoQuery);
-const UserInfoWithMutation = graphql(userInfoMutation, {
+const UserInfoWithMutation = graphql(UPDATE_AD_INFORMATION, {
   props: ({ mutate }) => ({
     submit: (id, user) =>
       mutate({
         variables: { id, user },
-        refetchQueries: ["myInformation"]
+        refetchQueries: ["userInformation"]
       })
   })
 });
 
 export default compose(
-  UserInfoWithData,
+  WithDirectoryEntry,
   UserInfoWithMutation
 )(UserData);

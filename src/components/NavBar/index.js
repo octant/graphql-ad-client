@@ -47,7 +47,12 @@ class NavBar extends React.Component {
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem>
-                <NavLink tag={Link} to="/me">
+                <NavLink tag={Link} to="/users">
+                  Users
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink tag={Link} to={`/users/${my.sAMAccountName}`}>
                   {my.displayName}
                 </NavLink>
               </NavItem>
@@ -64,6 +69,7 @@ export default graphql(
     query myDisplayName {
       my {
         displayName
+        sAMAccountName
       }
     }
   `

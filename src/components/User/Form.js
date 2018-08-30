@@ -1,12 +1,12 @@
 import React from "react";
 
+import myInformation from "./form-definitions/user";
 import Form from "../../lib/validated-form";
 import Layout from "../../lib/validated-form/reactstrap";
-import myInformation from "../../forms/my-information";
 
-const UserInfo = ({ values, submit }) => {
+const UserForm = ({ values, submit }) => {
   return (
-    <div style={{ width: "26em" }}>
+    <div>
       <Form
         definition={myInformation}
         layout={Layout}
@@ -17,4 +17,4 @@ const UserInfo = ({ values, submit }) => {
   );
 };
 
-export default UserInfo;
+export default UserForm;

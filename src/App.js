@@ -6,7 +6,8 @@ import { Route } from "react-router-dom";
 import "./App.css";
 
 import NavBar from "./components/NavBar";
-import UserInfo from "./components/UserInformation";
+import User from "./components/User";
+import Users from "./components/Users";
 
 class App extends Component {
   render() {
@@ -18,7 +19,15 @@ class App extends Component {
         <Container>
           <Row>
             <Col>
-              <Route path="/users/me" component={UserInfo} />
+              <Route
+                path="/users/"
+                exact
+                render={props => <Users {...props} />}
+              />
+              <Route
+                path="/users/:username"
+                render={props => <User {...props} />}
+              />
             </Col>
           </Row>
         </Container>

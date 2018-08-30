@@ -24,7 +24,7 @@ class ValidatedForm extends React.Component {
   };
 
   submit = () => {
-    this.props.onSubmit(this.state);
+    this.props.onSubmit({ ...this.state });
   };
 
   fields() {
