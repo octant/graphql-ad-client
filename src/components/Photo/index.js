@@ -18,6 +18,7 @@ const defaultProps = {
   file: null,
   cropping: false,
   base64URL: null,
+  error: null,
   crop: {
     maxHeight: 96,
     maxWidth: 96,
@@ -34,21 +35,8 @@ class Photo extends React.Component {
     this.state = { ...defaultProps };
   }
 
-  reset = () => {
-    clearCanvas([this.original, this.preview]);
-    this.setState({ ...defaultProps });
-  };
-
   handleCrop = crop => {
     this.setState({ crop });
-  };
-
-  handleCropStart = () => {
-    const canvas = this.original.current;
-    this.setState({
-      base64URL: canvas.toDataURL(this.state.file.type),
-      cropping: true
-    });
   };
 
   handleCropCancel = () => {
@@ -70,22 +58,33 @@ class Photo extends React.Component {
     });
   };
 
+  handleCropStart = () => {
+    const canvas = this.original.current;
+    this.setState({
+      base64URL: canvas.toDataURL(this.state.file.type),
+      cropping: true
+    });
+  };
+
   handleDrop = (acceptedFiles, rejectedFiles) => {
     console.log(acceptedFiles, rejectedFiles);
   };
 
-  handleSave = () => {
-    const fileExtension = extractImageFileExtensionFromBase64(
-      this.state.base64URL
-    );
-    const imageData64 = this.preview.current.toDataURL(this.state.file.type);
-
-    downloadBase64File(imageData64, `cropped.${fileExtension}`);
-    setTimeout(this.reset, 1000);
-  };
-
   handleFileSelect = (acceptedFiles, rejectedFiles) => {
-    if (acceptedFiles.length === 0) return;
+    if (rejectedFiles.length > 0) {
+      console.log(rejectedFiles);
+      rejectedFiles.reduce((total, file) => {
+        console.log(total);
+        return total + file.name;
+      });
+      this.setState(() => ({
+        error:
+          "The following files were rejected: " +
+          rejectedFiles.map(file => file.name).join(", ")
+      }));
+      return;
+    }
+
     const self = this;
     const file = acceptedFiles[0];
     const image = new Image();
@@ -125,13 +124,28 @@ class Photo extends React.Component {
         });
       };
 
-      self.setState(() => ({ file, selected: true }));
+      self.setState(() => ({ file, selected: true, error: null }));
     });
 
     this.setState(
       () => ({ ...defaultProps }),
       () => (image.src = URL.createObjectURL(file))
     );
+  };
+
+  handleSave = () => {
+    const fileExtension = extractImageFileExtensionFromBase64(
+      this.state.base64URL
+    );
+    const imageData64 = this.preview.current.toDataURL(this.state.file.type);
+
+    downloadBase64File(imageData64, `cropped.${fileExtension}`);
+    setTimeout(this.reset, 1000);
+  };
+
+  reset = () => {
+    clearCanvas([this.original, this.preview]);
+    this.setState({ ...defaultProps });
   };
 
   render() {
@@ -209,13 +223,14 @@ class Photo extends React.Component {
                     >
                       <UserIcon />
                     </Dropzone>
+                    <div>{this.state.error}</div>
                   </div>
                 )}
               </div>
             </div>
           </Col>
           <Col>
-            <div>
+            <div style={{ display: this.state.cropping ? "block" : "none" }}>
               <canvas ref={this.preview} />
             </div>
           </Col>
