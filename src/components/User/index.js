@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import Form from "./Form";
 
 import { USER_INFORMATION, UPDATE_AD_INFORMATION } from "./queries";
+import Photo from "../../components/Photo";
 
 class UserData extends React.Component {
   handleSubmit = state => {
@@ -36,8 +37,13 @@ class UserData extends React.Component {
       return <p>{error.message}</p>;
     }
     return (
-      <div key={this.props.match.params.username} style={{ width: "26em" }}>
-        <Form values={{ ...directoryEntry }} submit={this.handleSubmit} />
+      <div>
+        <div>
+          <Photo />
+        </div>
+        <div key={this.props.match.params.username} style={{ width: "26em" }}>
+          <Form values={{ ...directoryEntry }} submit={this.handleSubmit} />
+        </div>
       </div>
     );
   }
