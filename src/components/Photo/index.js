@@ -213,7 +213,7 @@ class Photo extends React.Component {
                         Crop
                       </Button>{" "}
                       <Button color="default" onClick={this.reset}>
-                        Cancel
+                        Discard
                       </Button>
                     </div>
                   )
