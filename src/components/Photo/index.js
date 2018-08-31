@@ -56,10 +56,6 @@ class Photo extends React.Component {
     });
   };
 
-  handleImageLoaded = image => {
-    console.log("handleImageLoaded");
-  };
-
   handleCropComplete = (crop, pixelCrop) => {
     this.setState({
       preview: image64toCanvasRef(
