@@ -20,7 +20,8 @@ const defaultProps = {
     maxHeight: 96,
     maxWidth: 96,
     aspect: 1 / 1
-  }
+  },
+  fileDimensions: {}
 };
 class Photo extends React.Component {
   constructor(props) {
@@ -109,6 +110,10 @@ class Photo extends React.Component {
         ctx.drawImage(image, -image.width / 2, -image.height / 2);
         ctx.restore();
         ctx.save();
+
+        self.setState({
+          fileDimensions: { height: canvas.height, width: canvas.width }
+        });
       };
 
       self.setState(() => ({ file, selected: true }));
@@ -131,15 +136,22 @@ class Photo extends React.Component {
           <Col>
             <div>
               {this.state.cropping ? (
-                <ReactCrop
-                  maxHeight={96}
-                  maxWidth={96}
-                  onImageLoaded={this.handleImageLoaded}
-                  onComplete={this.handleCropComplete}
-                  src={this.state.base64URL || ""}
-                  onChange={this.handleCrop}
-                  crop={this.state.crop}
-                />
+                <div
+                  style={{
+                    minWidth: this.state.fileDimensions.width,
+                    minHeight: this.state.fileDimensions.height
+                  }}
+                >
+                  <ReactCrop
+                    maxHeight={96}
+                    maxWidth={96}
+                    onImageLoaded={this.handleImageLoaded}
+                    onComplete={this.handleCropComplete}
+                    src={this.state.base64URL || ""}
+                    onChange={this.handleCrop}
+                    crop={this.state.crop}
+                  />
+                </div>
               ) : (
                 ""
               )}
