@@ -1,7 +1,7 @@
 import React from "react";
 import ReactCrop from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
-import { Button, Row, Col } from "reactstrap";
+import { Alert, Button, Col, Row } from "reactstrap";
 import EXIF from "exif-js";
 import Dropzone from "react-dropzone";
 
@@ -68,6 +68,10 @@ class Photo extends React.Component {
 
   handleDrop = (acceptedFiles, rejectedFiles) => {
     console.log(acceptedFiles, rejectedFiles);
+  };
+
+  handleErrorDismiss = () => {
+    this.setState(() => ({ error: null }));
   };
 
   handleFileSelect = (acceptedFiles, rejectedFiles) => {
@@ -223,7 +227,13 @@ class Photo extends React.Component {
                     >
                       <UserIcon />
                     </Dropzone>
-                    <div>{this.state.error}</div>
+                    {this.state.error ? (
+                      <Alert toggle={this.handleErrorDismiss} color="danger">
+                        {this.state.error}
+                      </Alert>
+                    ) : (
+                      ""
+                    )}
                   </div>
                 )}
               </div>
