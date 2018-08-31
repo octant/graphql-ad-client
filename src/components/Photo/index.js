@@ -84,7 +84,8 @@ class Photo extends React.Component {
     setTimeout(this.reset, 1000);
   };
 
-  handleFileSelect = acceptedFiles => {
+  handleFileSelect = (acceptedFiles, rejectedFiles) => {
+    if (acceptedFiles.length === 0) return;
     const self = this;
     const file = acceptedFiles[0];
     const image = new Image();
@@ -202,7 +203,7 @@ class Photo extends React.Component {
                   <div>
                     <Dropzone
                       multiple={false}
-                      maxSize={500000}
+                      maxSize={200000}
                       accept={"image/jpeg"}
                       onDrop={this.handleFileSelect}
                     >
