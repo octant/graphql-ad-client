@@ -37,11 +37,12 @@ class UserData extends React.Component {
       return <p>{error.message}</p>;
     }
     return (
-      <div>
+      <div key={this.props.match.params.username}>
         <div>
           <Photo />
+          <hr />
         </div>
-        <div key={this.props.match.params.username} style={{ width: "26em" }}>
+        <div style={{ width: "26em" }}>
           <Form values={{ ...directoryEntry }} submit={this.handleSubmit} />
         </div>
       </div>
