@@ -1,8 +1,15 @@
 import React from "react";
 import ReactCrop from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
-import { Input, Button } from "reactstrap";
+import { Input, Button, Row, Col } from "reactstrap";
 import EXIF from "exif-js";
+
+import {
+  clearCanvas,
+  downloadBase64File,
+  extractImageFileExtensionFromBase64,
+  image64toCanvasRef
+} from "./utils";
 
 const defaultProps = {
   selected: false,
@@ -23,7 +30,7 @@ class Photo extends React.Component {
     this.state = { ...defaultProps };
   }
 
-  handleFullStop = () => {
+  reset = () => {
     clearCanvas([this.original, this.preview]);
     this.setState({ ...defaultProps });
   };
@@ -35,7 +42,7 @@ class Photo extends React.Component {
   handleCropStart = () => {
     const canvas = this.original.current;
     this.setState({
-      base64URL: canvas.toDataURL("image/jpeg"),
+      base64URL: canvas.toDataURL(this.state.file.type),
       cropping: true
     });
   };
@@ -54,11 +61,23 @@ class Photo extends React.Component {
   };
 
   handleCropComplete = (crop, pixelCrop) => {
-    image64toCanvasRef(this.preview.current, this.state.base64URL, pixelCrop);
+    this.setState({
+      preview: image64toCanvasRef(
+        this.preview.current,
+        this.state.base64URL,
+        pixelCrop
+      )
+    });
   };
 
-  handleSave = e => {
-    e.preventDefault();
+  handleSave = () => {
+    const fileExtension = extractImageFileExtensionFromBase64(
+      this.state.base64URL
+    );
+    const imageData64 = this.preview.current.toDataURL(this.state.file.type);
+
+    downloadBase64File(imageData64, `cropped.${fileExtension}`);
+    setTimeout(this.reset, 1000);
   };
 
   handleFileSelect = e => {
@@ -107,107 +126,75 @@ class Photo extends React.Component {
   render() {
     return (
       <div>
-        <h2>Photo</h2>
-
-        <div>
-          {this.state.cropping ? (
-            <div
-              style={{
-                position: "static",
-                margin: 0
-              }}
-            >
-              <ReactCrop
-                maxHeight={96}
-                maxWidth={96}
-                onImageLoaded={this.handleImageLoaded}
-                onComplete={this.handleCropComplete}
-                src={this.state.base64URL || ""}
-                onChange={this.handleCrop}
-                crop={this.state.crop}
-              />
-            </div>
-          ) : (
-            ""
-          )}
-        </div>
-
-        <div>
-          <div
-            style={{
-              display: this.state.cropping ? "none" : "block"
-            }}
-          >
-            <canvas ref={this.original} />
-          </div>
-          <div>
-            {this.state.selected ? (
-              this.state.cropping ? (
-                <div>
-                  <Button color="success" onClick={this.handleSave}>
-                    Save
-                  </Button>{" "}
-                  <Button color="default" onClick={this.handleCropCancel}>
-                    Cancel
-                  </Button>
-                </div>
+        <Row>
+          <Col>
+            <h2>Photo</h2>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <div>
+              {this.state.cropping ? (
+                <ReactCrop
+                  maxHeight={96}
+                  maxWidth={96}
+                  onImageLoaded={this.handleImageLoaded}
+                  onComplete={this.handleCropComplete}
+                  src={this.state.base64URL || ""}
+                  onChange={this.handleCrop}
+                  crop={this.state.crop}
+                />
               ) : (
-                <div>
-                  <Button color="success" onClick={this.handleCropStart}>
-                    Crop
-                  </Button>{" "}
-                  <Button color="default" onClick={this.handleFullStop}>
-                    Cancel
-                  </Button>
-                </div>
-              )
-            ) : (
-              <div>
-                <Input onChange={this.handleFileSelect} type="file" />
+                ""
+              )}
+            </div>
+
+            <div>
+              <div
+                style={{
+                  display: this.state.cropping ? "none" : "block"
+                }}
+              >
+                <canvas ref={this.original} />
               </div>
-            )}
-          </div>
-          <div>
-            <canvas ref={this.preview} />
-          </div>
-        </div>
+              <div>
+                {this.state.selected ? (
+                  this.state.cropping ? (
+                    <div>
+                      <Button color="success" onClick={this.handleSave}>
+                        Save
+                      </Button>{" "}
+                      <Button color="default" onClick={this.handleCropCancel}>
+                        Cancel
+                      </Button>
+                    </div>
+                  ) : (
+                    <div>
+                      <Button color="success" onClick={this.handleCropStart}>
+                        Crop
+                      </Button>{" "}
+                      <Button color="default" onClick={this.reset}>
+                        Cancel
+                      </Button>
+                    </div>
+                  )
+                ) : (
+                  <div>
+                    <Input onChange={this.handleFileSelect} type="file" />
+                  </div>
+                )}
+              </div>
+            </div>
+          </Col>
+          <Col>
+            <div>
+              <canvas ref={this.preview} />
+            </div>
+          </Col>
+        </Row>
       </div>
     );
   }
-}
-
-function clearCanvas(refs) {
-  refs.forEach(ref => {
-    const canvas = ref.current;
-    const ctx = canvas.getContext("2d");
-
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.save();
-    ctx.canvas.height = 200;
-    ctx.canvas.width = 200;
-  });
-}
-
-export function image64toCanvasRef(canvasRef, image64, pixelCrop) {
-  const canvas = canvasRef; // document.createElement('canvas');
-  canvas.width = pixelCrop.width;
-  canvas.height = pixelCrop.height;
-  const ctx = canvas.getContext("2d");
-  const image = new Image();
-  image.src = image64;
-  image.onload = function() {
-    ctx.drawImage(
-      image,
-      pixelCrop.x,
-      pixelCrop.y,
-      pixelCrop.width,
-      pixelCrop.height,
-      0,
-      0,
-      pixelCrop.width,
-      pixelCrop.height
-    );
-  };
 }
 
 export default Photo;
