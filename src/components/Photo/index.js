@@ -1,8 +1,9 @@
 import React from "react";
 import ReactCrop from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
-import { Input, Button, Row, Col } from "reactstrap";
+import { Button, Row, Col } from "reactstrap";
 import EXIF from "exif-js";
+import Dropzone from "react-dropzone";
 
 import {
   clearCanvas,
@@ -10,6 +11,7 @@ import {
   extractImageFileExtensionFromBase64,
   image64toCanvasRef
 } from "./utils";
+import { UserIcon } from "./icons";
 
 const defaultProps = {
   selected: false,
@@ -23,6 +25,7 @@ const defaultProps = {
   },
   fileDimensions: {}
 };
+
 class Photo extends React.Component {
   constructor(props) {
     super(props);
@@ -67,6 +70,10 @@ class Photo extends React.Component {
     });
   };
 
+  handleDrop = (acceptedFiles, rejectedFiles) => {
+    console.log(acceptedFiles, rejectedFiles);
+  };
+
   handleSave = () => {
     const fileExtension = extractImageFileExtensionFromBase64(
       this.state.base64URL
@@ -77,9 +84,9 @@ class Photo extends React.Component {
     setTimeout(this.reset, 1000);
   };
 
-  handleFileSelect = e => {
+  handleFileSelect = acceptedFiles => {
     const self = this;
-    const file = e.target.files[0];
+    const file = acceptedFiles[0];
     const image = new Image();
     const canvas = this.original.current;
     const ctx = canvas.getContext("2d");
@@ -102,6 +109,7 @@ class Photo extends React.Component {
           canvas.height = this.height;
           canvas.width = this.width;
         }
+
         ctx.drawImage(image, 0, 0);
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.save();
@@ -118,6 +126,7 @@ class Photo extends React.Component {
 
       self.setState(() => ({ file, selected: true }));
     });
+
     this.setState(
       () => ({ ...defaultProps }),
       () => (image.src = URL.createObjectURL(file))
@@ -160,7 +169,10 @@ class Photo extends React.Component {
             <div>
               <div
                 style={{
-                  display: this.state.cropping ? "none" : "block"
+                  display:
+                    this.state.cropping || !this.state.selected
+                      ? "none"
+                      : "block"
                 }}
               >
                 <canvas ref={this.original} />
@@ -188,7 +200,14 @@ class Photo extends React.Component {
                   )
                 ) : (
                   <div>
-                    <Input onChange={this.handleFileSelect} type="file" />
+                    <Dropzone
+                      multiple={false}
+                      maxSize={500000}
+                      accept={"image/jpeg"}
+                      onDrop={this.handleFileSelect}
+                    >
+                      <UserIcon />
+                    </Dropzone>
                   </div>
                 )}
               </div>
