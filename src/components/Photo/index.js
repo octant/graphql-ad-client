@@ -10,9 +10,8 @@ import {
   extractImageFileExtensionFromBase64,
   image64toCanvasRef
 } from "./utils";
-import { UserIcon } from "./icons";
-import Canvas from "./Canvas";
 import PlaceHolder from "./PlaceHolder";
+import Preview from "./Preview";
 
 const defaultProps = {
   selected: false,
@@ -230,17 +229,7 @@ class Photo extends React.Component {
             </div>
           </Col>
           <Col>
-            <div style={{ display: this.state.cropping ? "block" : "none" }}>
-              <Canvas
-                style={{
-                  height: 196,
-                  width: 196,
-                  border: "dashed",
-                  borderRadius: 5
-                }}
-                ref={this.preview}
-              />
-            </div>
+            <Preview ref={this.preview} cropping={this.state.cropping} />
           </Col>
         </Row>
       </div>
