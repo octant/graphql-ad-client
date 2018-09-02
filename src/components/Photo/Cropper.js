@@ -11,27 +11,31 @@ const PlaceHolder = ({
   selected,
   width
 }) => (
-  <div>
+  <div
+    className="react-crop"
+    style={{
+      overflow: "auto"
+    }}
+  >
     <div
       className="react-crop"
-      style={{ display: cropping ? "block" : "none" }}
+      style={{
+        width: width,
+        height: height,
+        border: "dashed",
+        borderRadius: 5,
+        display: cropping ? "block" : "none"
+      }}
     >
-      <div
-        style={{
-          minWidth: width,
-          minHeight: height
-        }}
-      >
-        <ReactCrop
-          maxHeight={96}
-          maxWidth={96}
-          onImageLoaded={methods.imageLoaded}
-          onComplete={methods.cropComplete}
-          src={base64URL || ""}
-          onChange={methods.crop}
-          crop={crop}
-        />
-      </div>
+      <ReactCrop
+        maxHeight={96}
+        maxWidth={96}
+        onImageLoaded={methods.imageLoaded}
+        onComplete={methods.cropComplete}
+        src={base64URL || ""}
+        onChange={methods.crop}
+        crop={crop}
+      />
     </div>
     <SelectedControls
       cropping={cropping}
