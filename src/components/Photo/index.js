@@ -1,7 +1,6 @@
 import React from "react";
-import ReactCrop from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
-import { Button, Col, Row } from "reactstrap";
+import { Col, Row } from "reactstrap";
 import EXIF from "exif-js";
 
 import {
@@ -13,6 +12,7 @@ import {
 import PlaceHolder from "./PlaceHolder";
 import Preview from "./Preview";
 import Original from "./Original";
+import Cropper from "./Cropper";
 
 const defaultProps = {
   selected: false,
@@ -175,49 +175,23 @@ class Photo extends React.Component {
                 cropping={this.state.cropping}
                 ref={this.original}
               />
-              <div>
-                {this.state.selected ? (
-                  this.state.cropping ? (
-                    <div>
-                      <div
-                        style={{
-                          minWidth: this.state.fileDimensions.width,
-                          minHeight: this.state.fileDimensions.height
-                        }}
-                      >
-                        <ReactCrop
-                          maxHeight={96}
-                          maxWidth={96}
-                          onImageLoaded={this.handleImageLoaded}
-                          onComplete={this.handleCropComplete}
-                          src={this.state.base64URL || ""}
-                          onChange={this.handleCrop}
-                          crop={this.state.crop}
-                        />
-                      </div>
-                      <div>
-                        <Button color="success" onClick={this.handleSave}>
-                          Save
-                        </Button>{" "}
-                        <Button color="default" onClick={this.handleCropCancel}>
-                          Cancel
-                        </Button>
-                      </div>
-                    </div>
-                  ) : (
-                    <div>
-                      <Button color="success" onClick={this.handleCropStart}>
-                        Crop
-                      </Button>{" "}
-                      <Button color="default" onClick={this.reset}>
-                        Discard
-                      </Button>
-                    </div>
-                  )
-                ) : (
-                  ""
-                )}
-              </div>
+              <Cropper
+                base64URL={this.state.base64URL}
+                crop={this.state.crop}
+                cropping={this.state.cropping}
+                height={this.state.fileDimensions.height}
+                methods={{
+                  crop: this.handleCrop,
+                  cropCancel: this.handleCropCancel,
+                  cropComplete: this.handleCropComplete,
+                  cropStart: this.handleCropStart,
+                  imageLoaded: this.handleImageLoaded,
+                  reset: this.reset,
+                  save: this.handleSave
+                }}
+                selected={this.state.selected}
+                width={this.state.fileDimensions.width}
+              />
             </div>
           </Col>
           <Col>
