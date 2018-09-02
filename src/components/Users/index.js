@@ -2,7 +2,7 @@ import React from "react";
 
 import SelectUser from "./forms/Users";
 
-const Users = ({ values, submit, history }) => {
+const Users = ({ history }) => {
   return (
     <div>
       <h2>Users</h2>
