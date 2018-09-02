@@ -162,36 +162,32 @@ class Photo extends React.Component {
 
   render() {
     return (
-      <div>
-        <Row>
-          <Col>
-            <div>
-              <PlaceHolder
-                methods={this.methods()}
-                selected={this.state.selected}
-                error={this.state.error}
-              />
-              <Original
-                selected={this.state.selected}
-                cropping={this.state.cropping}
-                ref={this.original}
-              />
-              <Cropper
-                base64URL={this.state.base64URL}
-                crop={this.state.crop}
-                cropping={this.state.cropping}
-                height={this.state.fileDimensions.height}
-                methods={this.methods()}
-                selected={this.state.selected}
-                width={this.state.fileDimensions.width}
-              />
-            </div>
-          </Col>
-          <Col>
-            <Preview ref={this.preview} cropping={this.state.cropping} />
-          </Col>
-        </Row>
-      </div>
+      <Row>
+        <Col>
+          <PlaceHolder
+            methods={this.methods()}
+            selected={this.state.selected}
+            error={this.state.error}
+          />
+          <Original
+            selected={this.state.selected}
+            cropping={this.state.cropping}
+            ref={this.original}
+          />
+          <Cropper
+            base64URL={this.state.base64URL}
+            crop={this.state.crop}
+            cropping={this.state.cropping}
+            height={this.state.fileDimensions.height}
+            methods={this.methods()}
+            selected={this.state.selected}
+            width={this.state.fileDimensions.width}
+          />
+        </Col>
+        <Col>
+          <Preview ref={this.preview} cropping={this.state.cropping} />
+        </Col>
+      </Row>
     );
   }
 }
