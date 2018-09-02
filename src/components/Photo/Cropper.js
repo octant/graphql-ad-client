@@ -20,10 +20,11 @@ const PlaceHolder = ({
     <div
       className="react-crop"
       style={{
-        width: width,
-        height: height,
+        width: `${width}px`,
+        height: `${height}px`,
         border: "dashed",
         borderRadius: 5,
+        marginBottom: "0.25em",
         display: cropping ? "block" : "none"
       }}
     >
