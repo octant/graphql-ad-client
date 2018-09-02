@@ -15,7 +15,12 @@ class Users extends React.Component {
   render() {
     return (
       <FormGroup>
-        <Input onChange={this.handleSelect} name="users" type="select">
+        <Input
+          value={this.props.username}
+          onChange={this.handleSelect}
+          name="users"
+          type="select"
+        >
           <option>
             {this.props.data.loading ? "loading..." : "Select a user"}
           </option>
