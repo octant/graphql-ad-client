@@ -165,11 +165,6 @@ class Photo extends React.Component {
       <div>
         <Row>
           <Col>
-            <h2>Photo</h2>
-          </Col>
-        </Row>
-        <Row>
-          <Col>
             <div>
               <PlaceHolder
                 methods={this.methods()}
