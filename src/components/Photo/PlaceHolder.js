@@ -13,13 +13,12 @@ const PlaceHolder = ({ error, methods, selected }) => (
     >
       <UserIcon />
     </Dropzone>
-    {error ? (
+
+    <div style={{ padding: "1em 0 1em 0", display: error ? "block" : "none" }}>
       <Alert toggle={methods.dismiss} color="danger">
         {error}
       </Alert>
-    ) : (
-      ""
-    )}
+    </div>
   </div>
 );
 
