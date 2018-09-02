@@ -12,6 +12,7 @@ import {
 } from "./utils";
 import PlaceHolder from "./PlaceHolder";
 import Preview from "./Preview";
+import Original from "./Original";
 
 const defaultProps = {
   selected: false,
@@ -161,22 +162,11 @@ class Photo extends React.Component {
         <Row>
           <Col>
             <div>
-              <div
-                style={{
-                  display:
-                    this.state.cropping || !this.state.selected
-                      ? "none"
-                      : "block"
-                }}
-              >
-                <canvas
-                  style={{
-                    border: "dashed",
-                    borderRadius: 5
-                  }}
-                  ref={this.original}
-                />
-              </div>
+              <Original
+                selected={this.state.selected}
+                cropping={this.state.cropping}
+                ref={this.original}
+              />
               <div>
                 {this.state.selected ? (
                   this.state.cropping ? (
