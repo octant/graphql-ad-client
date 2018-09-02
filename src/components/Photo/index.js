@@ -161,29 +161,6 @@ class Photo extends React.Component {
         <Row>
           <Col>
             <div>
-              {this.state.cropping ? (
-                <div
-                  style={{
-                    minWidth: this.state.fileDimensions.width,
-                    minHeight: this.state.fileDimensions.height
-                  }}
-                >
-                  <ReactCrop
-                    maxHeight={96}
-                    maxWidth={96}
-                    onImageLoaded={this.handleImageLoaded}
-                    onComplete={this.handleCropComplete}
-                    src={this.state.base64URL || ""}
-                    onChange={this.handleCrop}
-                    crop={this.state.crop}
-                  />
-                </div>
-              ) : (
-                ""
-              )}
-            </div>
-
-            <div>
               <div
                 style={{
                   display:
@@ -192,18 +169,42 @@ class Photo extends React.Component {
                       : "block"
                 }}
               >
-                <canvas ref={this.original} />
+                <canvas
+                  style={{
+                    border: "dashed",
+                    borderRadius: 5
+                  }}
+                  ref={this.original}
+                />
               </div>
               <div>
                 {this.state.selected ? (
                   this.state.cropping ? (
                     <div>
-                      <Button color="success" onClick={this.handleSave}>
-                        Save
-                      </Button>{" "}
-                      <Button color="default" onClick={this.handleCropCancel}>
-                        Cancel
-                      </Button>
+                      <div
+                        style={{
+                          minWidth: this.state.fileDimensions.width,
+                          minHeight: this.state.fileDimensions.height
+                        }}
+                      >
+                        <ReactCrop
+                          maxHeight={96}
+                          maxWidth={96}
+                          onImageLoaded={this.handleImageLoaded}
+                          onComplete={this.handleCropComplete}
+                          src={this.state.base64URL || ""}
+                          onChange={this.handleCrop}
+                          crop={this.state.crop}
+                        />
+                      </div>
+                      <div>
+                        <Button color="success" onClick={this.handleSave}>
+                          Save
+                        </Button>{" "}
+                        <Button color="default" onClick={this.handleCropCancel}>
+                          Cancel
+                        </Button>
+                      </div>
                     </div>
                   ) : (
                     <div>
@@ -239,7 +240,15 @@ class Photo extends React.Component {
           </Col>
           <Col>
             <div style={{ display: this.state.cropping ? "block" : "none" }}>
-              <canvas ref={this.preview} />
+              <canvas
+                style={{
+                  height: 196,
+                  width: 196,
+                  border: "dashed",
+                  borderRadius: 5
+                }}
+                ref={this.preview}
+              />
             </div>
           </Col>
         </Row>
