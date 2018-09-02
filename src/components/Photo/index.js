@@ -123,18 +123,16 @@ class Photo extends React.Component {
         ctx.restore();
         ctx.save();
 
-        self.setState({
+        self.setState(() => ({
           fileDimensions: { height: canvas.height, width: canvas.width }
-        });
+        }));
       };
 
-      self.setState(() => ({ file, selected: true, error: null }));
+      self.setState(
+        () => ({ ...defaultProps, file, selected: true, error: null }),
+        () => (image.src = URL.createObjectURL(file))
+      );
     });
-
-    this.setState(
-      () => ({ ...defaultProps }),
-      () => (image.src = URL.createObjectURL(file))
-    );
   };
 
   handleSave = () => {
