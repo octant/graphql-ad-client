@@ -19,11 +19,7 @@ class App extends Component {
         <Container>
           <Row>
             <Col>
-              <Route
-                path="/users/"
-                exact
-                render={props => <Users {...props} />}
-              />
+              <Route path="/users/" render={props => <Users {...props} />} />
               <Route
                 path="/users/:username"
                 render={props => <User {...props} />}
