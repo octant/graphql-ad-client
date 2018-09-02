@@ -162,6 +162,14 @@ class Photo extends React.Component {
         <Row>
           <Col>
             <div>
+              <PlaceHolder
+                methods={{
+                  dismiss: this.handleErrorDismiss,
+                  select: this.handleFileSelect
+                }}
+                selected={this.state.selected}
+                error={this.state.error}
+              />
               <Original
                 selected={this.state.selected}
                 cropping={this.state.cropping}
@@ -207,13 +215,7 @@ class Photo extends React.Component {
                     </div>
                   )
                 ) : (
-                  <PlaceHolder
-                    methods={{
-                      dismiss: this.handleErrorDismiss,
-                      select: this.handleFileSelect
-                    }}
-                    error={this.state.error}
-                  />
+                  ""
                 )}
               </div>
             </div>
