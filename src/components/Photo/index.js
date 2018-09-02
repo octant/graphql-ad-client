@@ -146,6 +146,20 @@ class Photo extends React.Component {
     this.setState({ ...defaultProps });
   };
 
+  methods() {
+    return {
+      crop: this.handleCrop,
+      cropCancel: this.handleCropCancel,
+      cropComplete: this.handleCropComplete,
+      cropStart: this.handleCropStart,
+      dismiss: this.handleErrorDismiss,
+      imageLoaded: this.handleImageLoaded,
+      reset: this.reset,
+      save: this.handleSave,
+      select: this.handleFileSelect
+    };
+  }
+
   render() {
     return (
       <div>
@@ -158,10 +172,7 @@ class Photo extends React.Component {
           <Col>
             <div>
               <PlaceHolder
-                methods={{
-                  dismiss: this.handleErrorDismiss,
-                  select: this.handleFileSelect
-                }}
+                methods={this.methods()}
                 selected={this.state.selected}
                 error={this.state.error}
               />
@@ -175,15 +186,7 @@ class Photo extends React.Component {
                 crop={this.state.crop}
                 cropping={this.state.cropping}
                 height={this.state.fileDimensions.height}
-                methods={{
-                  crop: this.handleCrop,
-                  cropCancel: this.handleCropCancel,
-                  cropComplete: this.handleCropComplete,
-                  cropStart: this.handleCropStart,
-                  imageLoaded: this.handleImageLoaded,
-                  reset: this.reset,
-                  save: this.handleSave
-                }}
+                methods={this.methods()}
                 selected={this.state.selected}
                 width={this.state.fileDimensions.width}
               />
