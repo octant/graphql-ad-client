@@ -3,7 +3,7 @@ import Dropzone from "react-dropzone";
 import { UserIcon } from "./icons";
 import { Alert } from "reactstrap";
 
-const Preview = ({ error, methods }) => (
+const PlaceHolder = ({ error, methods }) => (
   <div>
     <Dropzone
       multiple={false}
@@ -23,4 +23,4 @@ const Preview = ({ error, methods }) => (
   </div>
 );
 
-export default Preview;
+export default PlaceHolder;
