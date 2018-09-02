@@ -9,10 +9,10 @@ import {
   extractImageFileExtensionFromBase64,
   image64toCanvasRef
 } from "./utils";
+import Cropper from "./Cropper";
+import Original from "./Original";
 import PlaceHolder from "./PlaceHolder";
 import Preview from "./Preview";
-import Original from "./Original";
-import Cropper from "./Cropper";
 
 const defaultProps = {
   selected: false,
