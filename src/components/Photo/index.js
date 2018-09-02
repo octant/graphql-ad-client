@@ -67,17 +67,12 @@ class Photo extends React.Component {
     });
   };
 
-  handleDrop = (acceptedFiles, rejectedFiles) => {
-    console.log(acceptedFiles, rejectedFiles);
-  };
-
   handleErrorDismiss = () => {
     this.setState(() => ({ error: null }));
   };
 
   handleFileSelect = (acceptedFiles, rejectedFiles) => {
     if (rejectedFiles.length > 0) {
-      console.log(rejectedFiles);
       rejectedFiles.reduce((total, file) => {
         console.log(total);
         return total + file.name;
