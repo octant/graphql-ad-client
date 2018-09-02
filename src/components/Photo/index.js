@@ -1,9 +1,8 @@
 import React from "react";
 import ReactCrop from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
-import { Alert, Button, Col, Row } from "reactstrap";
+import { Button, Col, Row } from "reactstrap";
 import EXIF from "exif-js";
-import Dropzone from "react-dropzone";
 
 import {
   clearCanvas,
@@ -12,6 +11,8 @@ import {
   image64toCanvasRef
 } from "./utils";
 import { UserIcon } from "./icons";
+import Canvas from "./Canvas";
+import PlaceHolder from "./PlaceHolder";
 
 const defaultProps = {
   selected: false,
@@ -217,30 +218,20 @@ class Photo extends React.Component {
                     </div>
                   )
                 ) : (
-                  <div>
-                    <Dropzone
-                      multiple={false}
-                      maxSize={200000}
-                      accept={"image/jpeg"}
-                      onDrop={this.handleFileSelect}
-                    >
-                      <UserIcon />
-                    </Dropzone>
-                    {this.state.error ? (
-                      <Alert toggle={this.handleErrorDismiss} color="danger">
-                        {this.state.error}
-                      </Alert>
-                    ) : (
-                      ""
-                    )}
-                  </div>
+                  <PlaceHolder
+                    methods={{
+                      dismiss: this.handleErrorDismiss,
+                      select: this.handleFileSelect
+                    }}
+                    error={this.state.error}
+                  />
                 )}
               </div>
             </div>
           </Col>
           <Col>
             <div style={{ display: this.state.cropping ? "block" : "none" }}>
-              <canvas
+              <Canvas
                 style={{
                   height: 196,
                   width: 196,
