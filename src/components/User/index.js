@@ -52,7 +52,10 @@ class UserData extends React.Component {
 }
 
 const WithDirectoryEntry = graphql(USER_INFORMATION, {
-  options: props => ({ variables: { username: props.match.params.username } })
+  options: props => ({
+    variables: { username: props.match.params.username },
+    fetchPolicy: "cache-and-network"
+  })
 });
 
 const UserInfoWithMutation = graphql(UPDATE_AD_INFORMATION, {
