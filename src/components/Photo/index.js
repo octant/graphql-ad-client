@@ -166,9 +166,12 @@ class Photo extends React.Component {
         <Col>
           <PlaceHolder
             methods={this.methods()}
-            selected={this.state.selected}
+            cropping={this.state.cropping}
             error={this.state.error}
           />
+          <Preview ref={this.preview} cropping={this.state.cropping} />
+        </Col>
+        <Col>
           <Original
             selected={this.state.selected}
             cropping={this.state.cropping}
@@ -183,9 +186,6 @@ class Photo extends React.Component {
             selected={this.state.selected}
             width={this.state.fileDimensions.width}
           />
-        </Col>
-        <Col>
-          <Preview ref={this.preview} cropping={this.state.cropping} />
         </Col>
       </Row>
     );
