@@ -23,7 +23,7 @@ export const resolvers = {
           appState: { __typename: "AppState", selectedUser: username }
         }
       });
-      return null;
+      return username;
     }
   }
 };
