@@ -1,6 +1,6 @@
 import React from "react";
 
-import userInformation from "./edit-schema";
+import userInformation from "./schema";
 import Form from "../../../lib/validated-form";
 import Layout from "../../../lib/validated-form/reactstrap";
 
