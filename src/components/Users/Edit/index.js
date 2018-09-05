@@ -2,12 +2,11 @@ import React from "react";
 import { graphql, compose } from "react-apollo";
 import { toast } from "react-toastify";
 
-import Form from "./Edit";
-
 import { USER_INFORMATION, UPDATE_AD_INFORMATION } from "../queries";
+import Form from "./Edit";
 import Photo from "../../Photo";
 
-class UserData extends React.Component {
+class EditUser extends React.Component {
   handleSubmit = state => {
     const {
       data: { directoryEntry }
@@ -71,4 +70,4 @@ const UserInfoWithMutation = graphql(UPDATE_AD_INFORMATION, {
 export default compose(
   WithDirectoryEntry,
   UserInfoWithMutation
-)(UserData);
+)(EditUser);

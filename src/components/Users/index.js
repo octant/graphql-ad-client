@@ -2,13 +2,14 @@ import React from "react";
 import { graphql } from "react-apollo";
 import { Route, Redirect } from "react-router-dom";
 
-import SelectUser from "./Users";
 import { SELECTED_USER } from "./queries";
-import User from "./Edit";
+import EditUser from "./Edit";
+import SelectUser from "./Users";
 
 const Users = ({
   history,
   data: {
+    loading,
     appState: { selectedUser }
   }
 }) => {
@@ -16,12 +17,16 @@ const Users = ({
     <div>
       <h2>Users</h2>
       <SelectUser username={selectedUser} history={history} />
-      <Route
-        path="/users/:username"
-        render={props =>
-          selectedUser ? <User {...props} /> : <Redirect to="/users" />
-        }
-      />
+      {loading ? (
+        "loading..."
+      ) : (
+        <Route
+          path="/users/:username"
+          render={props =>
+            selectedUser ? <EditUser {...props} /> : <Redirect to="/users" />
+          }
+        />
+      )}
     </div>
   );
 };
