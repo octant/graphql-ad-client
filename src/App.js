@@ -18,7 +18,7 @@ class App extends Component {
         <Container>
           <Row>
             <Col>
-              <Route path="/users/" render={props => <Users {...props} />} />
+              <Route path="/users" render={props => <Users {...props} />} />
             </Col>
           </Row>
         </Container>

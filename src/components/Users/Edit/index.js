@@ -37,9 +37,9 @@ class EditUser extends React.Component {
     }
     return (
       <div key={directoryEntry.sAMAccountName}>
-        <h2>{directoryEntry.displayName}</h2>
+        <h3>{directoryEntry.displayName}</h3>
         <div>
-          <Photo />
+          <Photo username={this.props.match.params.username} />
           <hr />
         </div>
         <div style={{ width: "26em" }}>

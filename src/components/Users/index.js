@@ -1,34 +1,28 @@
 import React from "react";
-import { graphql } from "react-apollo";
-import { Route, Redirect } from "react-router-dom";
+import { Route } from "react-router-dom";
 
-import { SELECTED_USER } from "./queries";
 import EditUser from "./Edit";
-import SelectUser from "./Users";
+import ListUsers from "./List";
+import ShowUser from "./Show";
 
-const Users = ({
-  history,
-  data: {
-    loading,
-    appState: { selectedUser }
-  }
-}) => {
+const Users = () => {
   return (
     <div>
-      <h2>Users</h2>
-      <SelectUser username={selectedUser} history={history} />
-      {loading ? (
-        "loading..."
-      ) : (
-        <Route
-          path="/users/:username"
-          render={props =>
-            selectedUser ? <EditUser {...props} /> : <Redirect to="/users" />
-          }
-        />
-      )}
+      <h3>Users</h3>
+
+      <Route path="/users" exact render={props => <ListUsers {...props} />} />
+
+      <Route
+        path="/users/:username/edit"
+        render={props => <EditUser {...props} />}
+      />
+
+      <Route
+        path="/users/:username"
+        render={props => <ShowUser {...props} />}
+      />
     </div>
   );
 };
 
-export default graphql(SELECTED_USER)(Users);
+export default Users;
