@@ -8,9 +8,3 @@ export const MY_NAME = gql`
     }
   }
 `;
-
-export const SELECT_USER = gql`
-  mutation selectUser($username: String) {
-    selectUser(username: $username) @client
-  }
-`;

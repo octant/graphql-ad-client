@@ -22,13 +22,6 @@ class NavBar extends React.Component {
     };
   }
 
-  handleProfileClick = username => {
-    return () =>
-      this.props
-        .selectUser(username)
-        .then(() => this.props.history.push(`/users/${username}`));
-  };
-
   toggle() {
     this.setState({
       isOpen: !this.state.isOpen
@@ -56,20 +49,12 @@ class NavBar extends React.Component {
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem>
-                <NavLink
-                  onClick={this.handleProfileClick("")}
-                  tag={Link}
-                  to="/users"
-                >
+                <NavLink tag={Link} to="/users">
                   Users
                 </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink
-                  onClick={this.handleProfileClick(my.sAMAccountName)}
-                  tag={Link}
-                  to={this.props.location}
-                >
+                <NavLink tag={Link} to={`/users/${my.sAMAccountName}/show`}>
                   {my.displayName}
                 </NavLink>
               </NavItem>
@@ -81,14 +66,4 @@ class NavBar extends React.Component {
   }
 }
 
-export default compose(
-  graphql(SELECT_USER, {
-    props: ({ mutate }) => ({
-      selectUser: username =>
-        mutate({
-          variables: { username }
-        })
-    })
-  }),
-  graphql(MY_NAME)
-)(NavBar);
+export default graphql(MY_NAME)(NavBar);
