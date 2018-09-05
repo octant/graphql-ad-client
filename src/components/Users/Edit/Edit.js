@@ -1,8 +1,8 @@
 import React from "react";
 
-import userInformation from "./form-definitions/user";
-import Form from "../../lib/validated-form";
-import Layout from "../../lib/validated-form/reactstrap";
+import userInformation from "./edit-schema";
+import Form from "../../../lib/validated-form";
+import Layout from "../../../lib/validated-form/reactstrap";
 
 const UserForm = ({ values, submit }) => {
   return (

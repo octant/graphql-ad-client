@@ -2,10 +2,10 @@ import React from "react";
 import { graphql, compose } from "react-apollo";
 import { toast } from "react-toastify";
 
-import Form from "./Form";
+import Form from "./Edit";
 
-import { USER_INFORMATION, UPDATE_AD_INFORMATION } from "./queries";
-import Photo from "../../components/Photo";
+import { USER_INFORMATION, UPDATE_AD_INFORMATION } from "../../User/queries";
+import Photo from "../../Photo";
 
 class UserData extends React.Component {
   handleSubmit = state => {

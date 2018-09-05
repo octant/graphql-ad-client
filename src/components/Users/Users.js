@@ -2,7 +2,7 @@ import React from "react";
 import { FormGroup, Input } from "reactstrap";
 import { graphql, compose, withApollo } from "react-apollo";
 
-import { ALL_AD_USERS, SELECT_USER } from "../queries";
+import { ALL_AD_USERS, SELECT_USER } from "./queries";
 
 class Users extends React.Component {
   handleSelect = e => {
