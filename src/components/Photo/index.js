@@ -2,6 +2,8 @@ import React from "react";
 import "react-image-crop/dist/ReactCrop.css";
 import { Col, Row } from "reactstrap";
 import EXIF from "exif-js";
+import { graphql } from "react-apollo";
+import { SELECTED_USER } from "../Users/queries";
 
 import {
   clearCanvas,
@@ -74,7 +76,6 @@ class Photo extends React.Component {
   handleFileSelect = (acceptedFiles, rejectedFiles) => {
     if (rejectedFiles.length > 0) {
       rejectedFiles.reduce((total, file) => {
-        console.log(total);
         return total + file.name;
       });
       this.setState(() => ({
@@ -132,12 +133,17 @@ class Photo extends React.Component {
   };
 
   handleSave = () => {
+    const {
+      data: {
+        appState: { selectedUser }
+      }
+    } = this.props;
     const fileExtension = extractImageFileExtensionFromBase64(
       this.state.base64URL
     );
     const imageData64 = this.preview.current.toDataURL(this.state.file.type);
 
-    downloadBase64File(imageData64, `cropped.${fileExtension}`);
+    downloadBase64File(imageData64, `${selectedUser}.${fileExtension}`);
     setTimeout(this.reset, 1000);
   };
 
@@ -192,4 +198,4 @@ class Photo extends React.Component {
   }
 }
 
-export default Photo;
+export default graphql(SELECTED_USER)(Photo);
