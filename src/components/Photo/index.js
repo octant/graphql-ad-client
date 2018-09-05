@@ -133,17 +133,13 @@ class Photo extends React.Component {
   };
 
   handleSave = () => {
-    const {
-      data: {
-        appState: { selectedUser }
-      }
-    } = this.props;
+    const { username } = this.props;
     const fileExtension = extractImageFileExtensionFromBase64(
       this.state.base64URL
     );
     const imageData64 = this.preview.current.toDataURL(this.state.file.type);
 
-    downloadBase64File(imageData64, `${selectedUser}.${fileExtension}`);
+    downloadBase64File(imageData64, `${username}.${fileExtension}`);
     setTimeout(this.reset, 1000);
   };
 
