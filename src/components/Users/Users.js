@@ -21,7 +21,7 @@ class Users extends React.Component {
           name="users"
           type="select"
         >
-          <option>
+          <option value="">
             {this.props.data.loading ? "loading..." : "Select a user"}
           </option>
           {(this.props.data.loading ? [] : this.props.data.users).map(
