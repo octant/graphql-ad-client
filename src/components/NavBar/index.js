@@ -68,7 +68,7 @@ class NavBar extends React.Component {
                 <NavLink
                   onClick={this.handleProfileClick(my.sAMAccountName)}
                   tag={Link}
-                  to=""
+                  to={this.props.location}
                 >
                   {my.displayName}
                 </NavLink>
