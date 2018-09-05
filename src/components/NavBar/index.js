@@ -9,9 +9,8 @@ import {
   NavLink
 } from "reactstrap";
 import { graphql, compose } from "react-apollo";
-import gql from "graphql-tag";
 import { Link } from "react-router-dom";
-import { SELECT_USER } from "../Users/queries";
+import { SELECT_USER, MY_NAME } from "../Users/queries";
 
 class NavBar extends React.Component {
   constructor(props) {
@@ -88,14 +87,5 @@ export default compose(
         })
     })
   }),
-  graphql(
-    gql`
-      query myDisplayName {
-        my {
-          displayName
-          sAMAccountName
-        }
-      }
-    `
-  )
+  graphql(MY_NAME)
 )(NavBar);
