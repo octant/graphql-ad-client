@@ -19,6 +19,7 @@ const Users = () => {
 
       <Route
         path="/users/:username"
+        exact
         render={props => <ShowUser {...props} />}
       />
     </div>
