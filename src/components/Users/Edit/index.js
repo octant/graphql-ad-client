@@ -37,7 +37,7 @@ class UserData extends React.Component {
       return <p>{error.message}</p>;
     }
     return (
-      <div key={this.props.match.params.username}>
+      <div key={directoryEntry.sAMAccountName}>
         <h2>{directoryEntry.displayName}</h2>
         <div>
           <Photo />
