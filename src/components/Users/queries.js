@@ -18,6 +18,22 @@ export const MY_NAME = gql`
   }
 `;
 
+export const NEW_USER = gql`
+  query userInformation($username: String!) {
+    directoryEntry(username: $username) {
+      department
+      description
+      displayName
+      givenName
+      physicalDeliveryOfficeName
+      sAMAccountName
+      sN
+      telephoneNumber
+      title
+    }
+  }
+`;
+
 export const SELECT_USER = gql`
   mutation selectUser($username: String) {
     selectUser(username: $username) @client

@@ -4,7 +4,7 @@ import userInformation from "./schema";
 import Form from "../../../lib/validated-form";
 import Layout from "../../../lib/validated-form/reactstrap";
 
-const UserForm = ({ values, submit }) => {
+const NewUserForm = ({ values, submit }) => {
   return (
     <div>
       <Form
@@ -17,4 +17,4 @@ const UserForm = ({ values, submit }) => {
   );
 };
 
-export default UserForm;
+export default NewUserForm;

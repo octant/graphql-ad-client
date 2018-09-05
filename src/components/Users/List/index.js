@@ -1,11 +1,11 @@
+import React from "react";
 import "react-table/react-table.css";
 import { graphql } from "react-apollo";
+import { Button } from "reactstrap";
 import { Link } from "react-router-dom";
-import React from "react";
-import ReactTable from "react-table";
-import matchSorter from "match-sorter";
 
 import { ALL_AD_USERS } from "../queries";
+import List from "./List";
 
 class ListUsers extends React.Component {
   render() {
@@ -20,31 +20,13 @@ class ListUsers extends React.Component {
       return <p>{error.message}</p>;
     }
     return (
-      <ReactTable
-        data={users}
-        filterable
-        columns={[
-          {
-            accessor: "displayName",
-            Header: "Name",
-            filterAll: true,
-            filterMethod: (filter, rows) =>
-              matchSorter(rows, filter.value, { keys: ["displayName"] })
-          },
-          {
-            Header: "Actions",
-            accessor: "sAMAccountName",
-            filterable: false,
-            Cell: props => (
-              <span>
-                <Link to={`/users/${props.value}`}>Show</Link>
-                {" | "}
-                <Link to={`/users/${props.value}/edit`}>Edit</Link>
-              </span>
-            )
-          }
-        ]}
-      />
+      <div>
+        <Button tag={Link} to="/users/new/">
+          New
+        </Button>
+        <hr />
+        <List users={users} />
+      </div>
     );
   }
 }

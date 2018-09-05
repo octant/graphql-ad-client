@@ -54,7 +54,7 @@ class NavBar extends React.Component {
                 </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink tag={Link} to={`/users/${my.sAMAccountName}`}>
+                <NavLink tag={Link} to={`/users/${my.sAMAccountName}/show`}>
                   {my.displayName}
                 </NavLink>
               </NavItem>
