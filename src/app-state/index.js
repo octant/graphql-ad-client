@@ -1,17 +1,28 @@
 export const typedefs = `
-  type Query {
+  type AppState {
     selectedUser: String
+  }
+
+  type Query {
+    appState: AppState
   }
 `;
 
 export const defaults = {
-  selectedUser: ""
+  appState: {
+    __typename: "AppState",
+    selectedUser: ""
+  }
 };
 
 export const resolvers = {
   Mutation: {
     selectUser: (_, { username }, { cache }) => {
-      cache.writeData({ data: { selectedUser: username } });
+      cache.writeData({
+        data: {
+          appState: { __typename: "AppState", selectedUser: username }
+        }
+      });
       return null;
     }
   }

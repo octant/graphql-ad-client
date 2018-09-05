@@ -25,13 +25,15 @@ export const SELECT_USER = gql`
 `;
 
 export const SELECTED_USER = gql`
-  query selectedUser @client {
-    selectedUser
+  query selectedUser {
+    appState @client {
+      selectedUser
+    }
   }
 `;
 
 export const UPDATE_AD_INFORMATION = gql`
-  mutation UpdateADUser($id: String!, $user: ADUserInput!) {
+  mutation updateADUser($id: String!, $user: ADUserInput!) {
     updateADUser(id: $id, user: $user) {
       sAMAccountName
     }
