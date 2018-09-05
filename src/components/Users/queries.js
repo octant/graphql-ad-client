@@ -25,8 +25,8 @@ export const SELECT_USER = gql`
 `;
 
 export const SELECTED_USER = gql`
-  {
-    selectedUser @client
+  query selectedUser @client {
+    selectedUser
   }
 `;
 
