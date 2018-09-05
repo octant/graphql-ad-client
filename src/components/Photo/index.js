@@ -3,7 +3,7 @@ import "react-image-crop/dist/ReactCrop.css";
 import { Col, Row } from "reactstrap";
 import EXIF from "exif-js";
 import { graphql } from "react-apollo";
-import { SELECTED_USER } from "../Users/queries";
+import { SELECTED_USER } from "./queries";
 
 import {
   clearCanvas,
