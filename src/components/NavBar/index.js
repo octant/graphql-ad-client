@@ -8,9 +8,9 @@ import {
   NavItem,
   NavLink
 } from "reactstrap";
-import { graphql, compose } from "react-apollo";
+import { graphql } from "react-apollo";
 import { Link } from "react-router-dom";
-import { SELECT_USER, MY_NAME } from "./queries";
+import { MY_NAME } from "./queries";
 
 class NavBar extends React.Component {
   constructor(props) {
