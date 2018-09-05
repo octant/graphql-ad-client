@@ -23,7 +23,10 @@ class NavBar extends React.Component {
   }
 
   handleProfileClick = username => {
-    return () => this.props.selectUser(username);
+    return () =>
+      this.props
+        .selectUser(username)
+        .then(() => this.props.history.push(`/users/${username}`));
   };
 
   toggle() {
@@ -65,7 +68,7 @@ class NavBar extends React.Component {
                 <NavLink
                   onClick={this.handleProfileClick(my.sAMAccountName)}
                   tag={Link}
-                  to={`/users/${my.sAMAccountName}`}
+                  to=""
                 >
                   {my.displayName}
                 </NavLink>

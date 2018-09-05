@@ -13,7 +13,7 @@ class App extends Component {
     return (
       <div className="App">
         <ToastContainer />
-        <NavBar />
+        <Route path="/" render={props => <NavBar {...props} />} />
         <hr />
         <Container>
           <Row>
