@@ -9,27 +9,19 @@ export const ALL_AD_USERS = gql`
   }
 `;
 
+export const CREATE_USER = gql`
+  mutation createUser($user: NewUserInput!) {
+    createUser(user: $user) {
+      employeeID
+    }
+  }
+`;
+
 export const MY_NAME = gql`
   query myDisplayName {
     my {
       displayName
       sAMAccountName
-    }
-  }
-`;
-
-export const NEW_USER = gql`
-  query userInformation($username: String!) {
-    directoryEntry(username: $username) {
-      department
-      description
-      displayName
-      givenName
-      physicalDeliveryOfficeName
-      sAMAccountName
-      sN
-      telephoneNumber
-      title
     }
   }
 `;

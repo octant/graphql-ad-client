@@ -1,10 +1,9 @@
-const schema = {
-  displayName: {
+const schema = users => ({
+  employeeID: {
     type: "text",
-    label: "Display Name",
+    label: "Employee ID",
     required: true,
-    min: 3,
-    pattern: /^[A-Z]/
+    pattern: /^\d{5}$/
   },
 
   givenName: {
@@ -25,7 +24,10 @@ const schema = {
 
   title: {
     type: "text",
-    label: "Title"
+    label: "Title",
+    required: true,
+    min: 3,
+    patter: /^[A-Z]/
   },
 
   description: {
@@ -39,14 +41,23 @@ const schema = {
   department: {
     type: "text",
     label: "Department",
+    required: true,
     min: 2,
     pattern: /^[A-Z]/,
     message: "at least two characters starting with a capital"
   },
 
+  manager: {
+    type: "select",
+    label: "Manager",
+    required: true,
+    options: [{}, ...optionsList(users)]
+  },
+
   physicalDeliveryOfficeName: {
     type: "select",
     label: "Office",
+    required: true,
     options: [
       {},
       { value: "294 Willow Avenue", text: "294 Willow Avenue" },
@@ -56,12 +67,26 @@ const schema = {
     ]
   },
 
+  homeDirectoryServer: {
+    type: "select",
+    label: "Home Drive Server",
+    required: true,
+    options: [{}, { value: "ahu-serv04", text: "ahu-serv04" }]
+  },
+
   telephoneNumber: {
     type: "text",
     label: "Extension",
     pattern: /^\d{4}$/,
     message: "enter a 4 digit extension"
   }
-};
+});
+
+function optionsList(users) {
+  return users.map(user => ({
+    value: user.sAMAccountName,
+    text: user.displayName
+  }));
+}
 
 export default schema;

@@ -1,14 +1,14 @@
 import React from "react";
 
-import userInformation from "./schema";
+import newUser from "./schema";
 import Form from "../../../lib/validated-form";
 import Layout from "../../../lib/validated-form/reactstrap";
 
-const NewUserForm = ({ values, submit }) => {
+const NewUserForm = ({ users, values, submit }) => {
   return (
     <div>
       <Form
-        definition={userInformation}
+        definition={newUser(users)}
         layout={Layout}
         onSubmit={submit}
         values={{ ...values }}
