@@ -36,20 +36,7 @@ class NewUser extends React.Component {
       <div>
         <h3>New User</h3>
         <div style={{ width: "26em" }}>
-          <Form
-            users={users}
-            values={{
-              employeeID: "19281",
-              givenName: "Michael",
-              sN: "Wood",
-              title: "Sr. Developer",
-              description: "Microage I.T.",
-              department: "IT",
-              manager: "matt_dunlop",
-              physicalDeliveryOfficeName: "294 Willow Avenue"
-            }}
-            submit={this.handleSubmit}
-          />
+          <Form users={users} submit={this.handleSubmit} />
         </div>
       </div>
     );
