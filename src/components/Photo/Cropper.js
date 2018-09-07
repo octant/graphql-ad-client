@@ -2,7 +2,7 @@ import React from "react";
 import ReactCrop from "react-image-crop";
 import { Button } from "reactstrap";
 
-const PlaceHolder = ({
+const Cropper = ({
   base64URL,
   crop,
   cropping,
@@ -73,4 +73,4 @@ const SelectedControls = ({ cropping, methods, selected }) => (
   </div>
 );
 
-export default PlaceHolder;
+export default Cropper;
