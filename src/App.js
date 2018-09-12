@@ -7,6 +7,7 @@ import "./App.css";
 
 import NavBar from "./components/NavBar";
 import Users from "./components/Users";
+import Questions from "./components/Questions";
 
 class App extends Component {
   render() {
@@ -19,6 +20,10 @@ class App extends Component {
           <Row>
             <Col>
               <Route path="/users" render={props => <Users {...props} />} />
+              <Route
+                path="/questions"
+                render={props => <Questions {...props} />}
+              />
             </Col>
           </Row>
         </Container>
