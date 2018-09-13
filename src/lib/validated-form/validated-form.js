@@ -5,9 +5,9 @@ class ValidatedForm extends React.Component {
     super(props);
 
     const validProps = {};
-
+    const passedValues = this.props.values || {};
     for (const key in props.schema.schemaDefinition) {
-      if (props.values.hasOwnProperty(key)) {
+      if (passedValues.hasOwnProperty(key)) {
         validProps[key] = props.values[key] === null ? "" : props.values[key];
       }
     }
