@@ -4,7 +4,7 @@ import Field from "../Field";
 import { Button, Form } from "reactstrap";
 import templates from "./templates";
 
-const Layout = ({ errors, fields, isValid, methods }) => {
+const Layout = ({ buttons, errors, fields, isValid, methods }) => {
   return (
     <Form>
       {Object.keys(fields).map((field, index) => {
@@ -19,7 +19,7 @@ const Layout = ({ errors, fields, isValid, methods }) => {
       })}
       <hr />
       <Button color={"success"} disabled={!isValid} onClick={methods.submit}>
-        Save
+        {buttons ? buttons.submit : "Save"}
       </Button>
     </Form>
   );

@@ -48,6 +48,7 @@ class ValidatedForm extends React.Component {
 
   render() {
     return this.props.children({
+      buttons: this.props.buttons,
       customTemplates: this.props.customTemplates,
       fields: this.fields(),
       values: { ...this.state },

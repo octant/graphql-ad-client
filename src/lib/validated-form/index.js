@@ -3,9 +3,10 @@ import React from "react";
 import Schema from "./schema";
 import ValidatedForm from "./validated-form";
 
-const FormWrapper = ({ definition, layout, onSubmit, values }) => {
+const FormWrapper = ({ buttons, definition, layout, onSubmit, values }) => {
   return (
     <ValidatedForm
+      buttons={buttons}
       onSubmit={onSubmit}
       schema={new Schema(definition)}
       values={values}
