@@ -12,11 +12,6 @@ export const q = {
 };
 
 export const a = {
-  value: {
-    type: "text",
-    label: "Value",
-    required: true
-  },
   text: {
     type: "textarea",
     label: "Text",
