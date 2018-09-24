@@ -9,6 +9,7 @@
     "graphql": "^0.13.2",
     "graphql-tag": "^2.9.2",
     "match-sorter": "^2.3.0",
+    "prop-types": "^15.6.2",
     "react": "^16.4.2",
     "react-apollo": "^2.1.11",
     "react-dom": "^16.4.2",
@@ -19,6 +20,7 @@
     "react-scripts": "1.1.5",
     "react-table": "^6.8.6",
     "react-toastify": "4.1",
+    "react-validated-frm": "^0.2.0",
     "reactstrap": "^6.4.0"
   },
   "scripts": {
