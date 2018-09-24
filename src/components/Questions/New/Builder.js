@@ -145,7 +145,7 @@ export default class App extends Component {
           <Col>
             <h2>Alternatives</h2>
             {this.state.alternatives.map((a, i) => (
-              <div key={`alternatives-${i}`}>
+              <div key={`alternatives-${this.props.type}-${i}`}>
                 <SubformExample
                   name={`alternative-${i}`}
                   ref={this.subformRefs["alternatives"][i]}
