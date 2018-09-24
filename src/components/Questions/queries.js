@@ -5,7 +5,17 @@ export const QUESTIONS = gql`
     questions {
       id
       type
+      topic
       stem
+    }
+  }
+`;
+
+export const QUESTION = gql`
+  query getQuestion($id: String!) {
+    question(id: $id) {
+      id
+      type
       stem
       alternatives {
         id
@@ -13,8 +23,15 @@ export const QUESTIONS = gql`
         value
         text
         type
-        respondents
       }
+    }
+  }
+`;
+
+export const CREATE_QUESTION = gql`
+  mutation addQuestion($question: QuestionInput!) {
+    addQuestion(question: $question) {
+      id
     }
   }
 `;
