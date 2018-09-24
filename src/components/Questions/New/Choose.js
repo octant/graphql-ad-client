@@ -16,8 +16,6 @@ class ChooseQuestionType extends React.Component {
   questionTypes = () => [
     { value: "", text: "Select a type..." },
     { value: "mc", text: "Multiple Choice" },
-    { value: "ms", text: "Multiple Select" },
-    { value: "o", text: "Ordered" },
     { value: "yn", text: "Yes / No" },
     { value: "rh", text: "Raise Hand" },
     { value: "tf", text: "True / False" }
