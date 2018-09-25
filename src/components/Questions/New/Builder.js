@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Container, Col, Row, Button } from "reactstrap";
 
-import { alternatives as preSets } from "./schema";
+import { defaultAlternatives as defaults } from "./schema";
 import RootForm from "./Stem";
 import SubformExample from "./Alternative";
 import { characterAtIndex } from "../../../lib/utils/range";
@@ -31,7 +31,7 @@ export default class App extends Component {
       return {
         ...state,
         type: props.type,
-        alternatives: [...preSets[props.type]]
+        alternatives: [...defaults[props.type]]
       };
     } else {
       return null;
@@ -170,7 +170,7 @@ export default class App extends Component {
             {this.state.alternatives.map((a, i) => (
               <div key={`alternatives-${this.props.type}-${i}`}>
                 <h3>
-                  {this.state["alternatives"][i].value}){" "}
+                  {`${this.state["alternatives"][i].value})`}{" "}
                   {this.state.type === "mc" ? (
                     <Button
                       size="sm"

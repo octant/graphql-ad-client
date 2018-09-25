@@ -9,7 +9,7 @@ const Alternative = React.forwardRef((props, ref) => {
   return (
     <FormWrapper
       ref={ref}
-      definition={Forms["a"]}
+      definition={Forms["answer"]}
       layout={Layout}
       onChange={methods.change}
       onInit={methods.init}

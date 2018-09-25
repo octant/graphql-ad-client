@@ -1,6 +1,6 @@
 import { characterAtIndex } from "../../../lib/utils/range";
 
-export const q = {
+export const question = {
   stem: {
     type: "textarea",
     label: "Question",
@@ -13,7 +13,7 @@ export const q = {
   }
 };
 
-export const a = {
+export const answer = {
   text: {
     type: "textarea",
     label: "Text",
@@ -40,7 +40,7 @@ const buildMultipleChoice = () => {
   return result;
 };
 
-export const alternatives = {
+export const defaultAlternatives = {
   mc: buildMultipleChoice(),
   yn: [
     { value: "no", text: "No", type: "na" },

@@ -9,7 +9,7 @@ const Stem = React.forwardRef((props, ref) => {
   return (
     <FormWrapper
       ref={ref}
-      definition={Forms["q"]}
+      definition={Forms["question"]}
       layout={Layout}
       values={values}
       onChange={methods.change}
