@@ -34,6 +34,7 @@ class ChooseQuestionType extends React.Component {
         <hr />
         {this.state.choice !== "" ? (
           <Builder
+            key={this.state.choice}
             methods={{ submit: this.props.submit }}
             type={this.state.choice}
           />
