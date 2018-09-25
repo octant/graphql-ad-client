@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import { Container, Col, Row, Button } from "reactstrap";
 
 import { defaultAlternatives as defaults } from "./schema";
-import RootForm from "./Stem";
-import SubformExample from "./Alternative";
-import { characterAtIndex } from "../../../lib/utils/range";
+import RootForm from "../Shared/Stem";
+import SubformExample from "../Shared/Alternative";
+import { characterAtIndex } from "../lib/range";
 
 export default class App extends Component {
   constructor(props) {
