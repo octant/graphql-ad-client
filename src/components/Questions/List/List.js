@@ -30,8 +30,8 @@ const QuestionTable = ({ questions }) => (
           matchSorter(rows, filter.value, { keys: ["type"] })
       },
       {
-        Header: "Type",
-        accessor: "type",
+        Header: "Actions",
+        accessor: "id",
         filterable: false,
         Cell: props => (
           <span>
