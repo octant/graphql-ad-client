@@ -5,7 +5,6 @@ import { QUESTION } from "../queries";
 import Show from "./Show";
 
 const ShowQuestion = ({ data: { error, loading, question } }) => {
-  console.log(question);
   if (loading) {
     return <p>Loading ...</p>;
   }
