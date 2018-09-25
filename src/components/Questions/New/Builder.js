@@ -4,6 +4,7 @@ import { Container, Col, Row, Button } from "reactstrap";
 import { alternatives as preSets } from "./schema";
 import RootForm from "./Stem";
 import SubformExample from "./Alternative";
+import { characterAtIndex } from "../../../lib/utils/range";
 
 export default class App extends Component {
   constructor(props) {
@@ -27,9 +28,8 @@ export default class App extends Component {
 
   static getDerivedStateFromProps(props, state) {
     if (state.type !== props.type) {
-      const { alternatives, ...rest } = state;
       return {
-        ...rest,
+        ...state,
         type: props.type,
         alternatives: [...preSets[props.type]]
       };
@@ -82,7 +82,15 @@ export default class App extends Component {
   handleAddAlternative = () => {
     this.subformRefs.alternatives.push(React.createRef());
     this.setState(
-      state => ({ alternatives: [...state.alternatives, {}] }),
+      state => ({
+        alternatives: [
+          ...state.alternatives.map((a, i) => ({
+            ...a,
+            value: characterAtIndex(i)
+          })),
+          { value: characterAtIndex(state.alternatives.length) }
+        ]
+      }),
       this.isValid
     );
   };
@@ -93,7 +101,7 @@ export default class App extends Component {
         alternatives: [
           ...state.alternatives.slice(0, i),
           ...state.alternatives.slice(i + 1)
-        ]
+        ].map((a, i) => ({ ...a, value: characterAtIndex(i) }))
       }),
       () => {
         this.subformRefs.alternatives = this.subformRefs.alternatives.slice(
@@ -146,6 +154,19 @@ export default class App extends Component {
             <h2>Alternatives</h2>
             {this.state.alternatives.map((a, i) => (
               <div key={`alternatives-${this.props.type}-${i}`}>
+                <h3>
+                  {this.state["alternatives"][i].value}){" "}
+                  {this.state.type === "mc" ? (
+                    <Button
+                      color="danger"
+                      onClick={this.handleRemoveAlternative(i)}
+                    >
+                      -
+                    </Button>
+                  ) : (
+                    ""
+                  )}
+                </h3>
                 <SubformExample
                   name={`alternative-${i}`}
                   ref={this.subformRefs["alternatives"][i]}
@@ -156,24 +177,22 @@ export default class App extends Component {
                   }}
                   values={this.state["alternatives"][i]}
                 />
-                <Button
-                  color="danger"
-                  onClick={this.handleRemoveAlternative(i)}
-                >
-                  -
-                </Button>
               </div>
             ))}
           </Col>
         </Row>
-        <hr />
-        <Row>
-          <Col>
-            <Button color="success" onClick={this.handleAddAlternative}>
-              +
-            </Button>
-          </Col>
-        </Row>
+
+        {this.state.type === "mc" ? (
+          <Row>
+            <Col>
+              <Button color="success" onClick={this.handleAddAlternative}>
+                +
+              </Button>
+            </Col>
+          </Row>
+        ) : (
+          ""
+        )}
         <hr />
         <Row>
           <Col>

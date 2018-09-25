@@ -1,3 +1,5 @@
+import { characterAtIndex } from "../../../lib/utils/range";
+
 export const q = {
   stem: {
     type: "textarea",
@@ -30,8 +32,16 @@ export const a = {
   }
 };
 
+const buildMultipleChoice = () => {
+  const result = [];
+  for (let index = 0; index < 4; index++) {
+    result.push({ value: characterAtIndex(index) });
+  }
+  return result;
+};
+
 export const alternatives = {
-  mc: [{ value: "a" }, { value: "b" }, { value: "c" }, { value: "d" }],
+  mc: buildMultipleChoice(),
   yn: [
     { value: "no", text: "No", type: "na" },
     { value: "yes", text: "Yes", type: "na" }
