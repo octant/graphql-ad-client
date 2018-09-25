@@ -9,6 +9,7 @@
     "graphql": "^0.13.2",
     "graphql-tag": "^2.9.2",
     "match-sorter": "^2.3.0",
+    "omit-deep-lodash": "^1.1.2",
     "prop-types": "^15.6.2",
     "react": "^16.4.2",
     "react-apollo": "^2.1.11",
