@@ -19,7 +19,6 @@ export const QUESTION = gql`
       stem
       alternatives {
         id
-        inputType
         value
         text
         type

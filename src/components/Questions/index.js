@@ -4,7 +4,7 @@ import { Route } from "react-router-dom";
 // import EditQuestion from "./Edit";
 import ListQuestions from "./List";
 import NewQuestion from "./New";
-// import ShowQuestion from "./Show";
+import ShowQuestion from "./Show";
 
 const Questions = props => {
   return (
@@ -23,14 +23,14 @@ const Questions = props => {
         render={props => <NewQuestion {...props} />}
       />
 
-      {/* <Route
-        path="/users/:username/show"
+      <Route
+        path="/questions/:id/show"
         exact
         render={props => <ShowQuestion {...props} />}
-      /> */}
+      />
 
       {/* <Route
-        path="/users/:username/edit"
+        path="/questions/:id/edit"
         exact
         render={props => <EditQuestion {...props} />}
       /> */}
