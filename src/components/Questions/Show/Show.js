@@ -1,7 +1,6 @@
 import React from "react";
 
 const ShowQuestion = ({ question }) => {
-  console.log(question);
   return (
     <div>
       <p>{question.stem}</p>
