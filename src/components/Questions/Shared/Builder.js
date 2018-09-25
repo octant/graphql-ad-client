@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import { Container, Col, Row, Button } from "reactstrap";
-
-import { defaultAlternatives as defaults } from "./schema";
-import RootForm from "../Shared/Stem";
-import SubformExample from "../Shared/Alternative";
+import { defaultAlternatives as defaults } from "../New/schema";
+import RootForm from "./Stem";
+import SubformExample from "./Alternative";
 import { characterAtIndex } from "../lib/range";
 
 export default class App extends Component {
@@ -16,6 +15,7 @@ export default class App extends Component {
     };
 
     this.state = {
+      ...props.question,
       isValid: false
     };
   }
@@ -27,7 +27,7 @@ export default class App extends Component {
   }
 
   static getDerivedStateFromProps(props, state) {
-    if (state.type !== props.type) {
+    if (state.type !== props.type && !props.question) {
       return {
         ...state,
         type: props.type,
@@ -40,8 +40,11 @@ export default class App extends Component {
 
   handleSubmit = () => {
     const { isValid, ...question } = this.state;
-
-    this.props.methods.submit(question);
+    if (this.props.submitType === "update") {
+      this.props.submit(question);
+    } else {
+      this.props.methods.submit(question);
+    }
   };
 
   handleChange = (name, value) => {

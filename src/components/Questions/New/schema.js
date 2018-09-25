@@ -10,13 +10,7 @@ const buildMultipleChoice = () => {
 
 export const defaultAlternatives = {
   mc: buildMultipleChoice(),
-  yn: [
-    { value: "no", text: "No", type: "na" },
-    { value: "yes", text: "Yes", type: "na" }
-  ],
-  rh: [
-    { value: "no", text: "<-", type: "na" },
-    { value: "yes", text: "->", type: "na" }
-  ],
+  yn: [{ value: "no", text: "No" }, { value: "yes", text: "Yes" }],
+  rh: [{ value: "false", text: "<-" }, { value: "true", text: "->" }],
   tf: [{ value: "false", text: "False" }, { value: "true", text: "True" }]
 };

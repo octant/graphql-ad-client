@@ -37,7 +37,8 @@ export default graphql(CREATE_QUESTION, {
   props: ({ mutate }) => ({
     submit: question =>
       mutate({
-        variables: { question }
+        variables: { question },
+        refetchQueries: ["getQuestions"]
       })
   })
 })(NewQuestion);

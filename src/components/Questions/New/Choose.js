@@ -1,6 +1,6 @@
 import React from "react";
 import { Input } from "reactstrap";
-import Builder from "./Builder";
+import Builder from "../Shared/Builder";
 
 class ChooseQuestionType extends React.Component {
   constructor(props) {

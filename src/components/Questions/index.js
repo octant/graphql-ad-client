@@ -1,7 +1,7 @@
 import React from "react";
 import { Route } from "react-router-dom";
 
-// import EditQuestion from "./Edit";
+import EditQuestion from "./Edit";
 import ListQuestions from "./List";
 import NewQuestion from "./New";
 import ShowQuestion from "./Show";
@@ -29,11 +29,11 @@ const Questions = props => {
         render={props => <ShowQuestion {...props} />}
       />
 
-      {/* <Route
+      <Route
         path="/questions/:id/edit"
         exact
         render={props => <EditQuestion {...props} />}
-      /> */}
+      />
     </div>
   );
 };
