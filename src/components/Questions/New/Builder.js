@@ -58,7 +58,11 @@ export default class App extends Component {
   };
 
   handleSubformListChange = (name, index) => (key, value) => {
-    const list = [...this.state[name]];
+    const list =
+      name === "alternatives" && key === "type"
+        ? this.questionTypeSelector(value)([...this.state[name]], index)
+        : [...this.state[name]];
+
     list[index][key] = value;
 
     this.setState(
@@ -132,6 +136,17 @@ export default class App extends Component {
     );
   };
 
+  questionTypeSelector = type => (list, index) => {
+    switch (type) {
+      case "answer":
+        return list.map(a => ({ ...a, type: "distractor" }));
+      case "na":
+        return list.map(a => ({ ...a, type: "na" }));
+      default:
+        return list;
+    }
+  };
+
   render() {
     return (
       <Container>
@@ -151,17 +166,18 @@ export default class App extends Component {
         </Row>
         <Row>
           <Col>
-            <h2>Alternatives</h2>
+            <h2>Choices</h2>
             {this.state.alternatives.map((a, i) => (
               <div key={`alternatives-${this.props.type}-${i}`}>
                 <h3>
                   {this.state["alternatives"][i].value}){" "}
                   {this.state.type === "mc" ? (
                     <Button
+                      size="sm"
                       color="danger"
                       onClick={this.handleRemoveAlternative(i)}
                     >
-                      -
+                      X
                     </Button>
                   ) : (
                     ""
