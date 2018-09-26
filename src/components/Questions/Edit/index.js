@@ -14,10 +14,11 @@ class EditQuestion extends React.Component {
     const { id, ...rest } = state;
     this.props
       .submit(question.id, rest)
-      .then(() => {
+      .then(({ data: { updateQuestion: { id } } }) => {
         toast.success("Your information has been saved!", {
           position: toast.POSITION.BOTTOM_RIGHT
         });
+        this.props.history.push(`/questions/${id}/show`);
       })
       .catch(() => {
         toast.error("Failed to save your information!", {

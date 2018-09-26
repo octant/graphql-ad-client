@@ -9,10 +9,11 @@ class NewQuestion extends React.Component {
   handleSubmit = state => {
     this.props
       .submit(state)
-      .then(() => {
+      .then(({ data: { addQuestion: { id } } }) => {
         toast.success("Your question has been saved!", {
           position: toast.POSITION.BOTTOM_RIGHT
         });
+        this.props.history.push(`/questions/${id}/show`);
       })
       .catch(() => {
         toast.error("Failed to save your question!", {
